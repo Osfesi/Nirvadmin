@@ -80,7 +80,8 @@
             const link = linkInput.value;
 
             if (username && password && link) {
-                fetch('/add-user', {
+                // Aquí se ha corregido la URL de la API a '/api/add-user'
+                fetch('/api/add-user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
