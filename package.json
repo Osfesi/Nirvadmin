@@ -1,3 +1,16 @@
-"scripts": {
+{
+  "name": "nirva2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
     "start": "node server.js"
   },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^4.17.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
