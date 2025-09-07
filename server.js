@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 
-// Declarar 'app' al inicio para que sea accesible globalmente
+// Declarar 'app' al inicio para que sea accesible
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -16,7 +16,7 @@ let db;
 const client = new MongoClient(uri);
 
 // Definir las rutas AQUÍ, antes de las funciones
-// Ruta para añadir un nuevo usuario (o reemplazar uno existente)
+// Ruta para añadir un nuevo usuario
 app.post('/api/add-user', async (req, res) => {
     const { username, password, link } = req.body;
 
@@ -26,6 +26,8 @@ app.post('/api/add-user', async (req, res) => {
 
     try {
         const usersCollection = db.collection('users');
+        
+        // Usamos updateOne con upsert: true para una operación atómica
         const result = await usersCollection.updateOne(
             { username: username },
             { $set: { username, password, link } },
@@ -44,7 +46,7 @@ app.post('/api/add-user', async (req, res) => {
     }
 });
 
-// Ruta para manejar el inicio de sesión
+// Ruta para el inicio de sesión
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     const adminUser = "1955";
@@ -71,7 +73,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Servir archivos estáticos
+// Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Ahora sí, la función para conectar a la DB y el servidor
